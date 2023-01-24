@@ -42,31 +42,33 @@ getLocation().then((position) => {
       console.log(data.daily[0].dt);
       console.log(data.hourly.length);
       cardCreator(data);
-      let newKing = new Date (data.hourly[0].dt *1000)
-      console.log(newKing);
     });
 });
 
 function cardCreator(data) {
-
-  for (let i = 0; i <= data.hourly.length; i++){
-    let newDiv = document.createElement('div');
-    newDiv.innerHTML =`
-        <h1>DT ${data.hourly[i].dt}</h1>
+  for (let i = data.hourly.length-1; i > 0; i--) {
+    let newDiv = document.createElement("div");
+    newDiv.innerHTML = `
+        <h1>Card ${i}</h1>
+        <h1>${data.timezone}</h1>
+        <h1>DT ${new Date(data.hourly[i].dt * 1000)}</h1>
         <h1>TEMP ${data.hourly[i].temp}</h1>
         <h1>FEELS LIKE ${data.hourly[i].feels_like}</h1>
         <h1>PRESSURE ${data.hourly[i].pressure}</h1>
         <h1>HUMIDITY ${data.hourly[i].humidity}</h1>
-    `
-    div.after(newDiv)
-    div.innerHTML = `
-    <h1>Temperature ${data.current.temp}</h1>        
-    <h1>TimeZone: ${data.timezone}</h1>   
+        <br>
+    `;
+    newDiv.style.border = '1px solid black'
+    newDiv.style.width = '1100px'
+    div.after(newDiv);
+    // div.innerHTML = `
+    // <h1>Temperature ${data.current.temp}</h1>        
+    // <h1>TimeZone: ${data.timezone}</h1>   
   
-    `
+    // `;
   }
-
 }
+
 `
 5. inside the javascript, select the div and get it ready to append innerHTML or append cards in it
 6. create a function that accepts an object as argument and returns a string with HTML syntax that will represent a card
