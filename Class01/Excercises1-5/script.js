@@ -95,3 +95,18 @@ class Student {
 }
 let Kire = new  Student ('Kiril','Jordanov','1998','SEDC',[7,8,9,6,7])
 console.log(Kire);
+
+
+let king = {
+    name: {
+        first:{
+            pocket1: [1,2,3],
+            pocket2: [3,4,5,6]
+        },
+        second:'Filip'
+    }
+    
+}
+
+let {pocket1, pocket2} = king.name.first
+console.log(pocket1);

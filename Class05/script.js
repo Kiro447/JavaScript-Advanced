@@ -51,11 +51,11 @@ function cardCreator(data) {
     newDiv.innerHTML = `
         <h1>Card ${i}</h1>
         <h1>${data.timezone}</h1>
-        <h1>DT ${new Date(data.hourly[i].dt * 1000)}</h1>
-        <h1>TEMP ${data.hourly[i].temp}</h1>
-        <h1>FEELS LIKE ${data.hourly[i].feels_like}</h1>
-        <h1>PRESSURE ${data.hourly[i].pressure}</h1>
-        <h1>HUMIDITY ${data.hourly[i].humidity}</h1>
+        <h1>DayTime ${new Date(data.hourly[i].dt * 1000)}</h1>
+        <h1>Temperature ${data.hourly[i].temp}</h1>
+        <h1>Feels Like ${data.hourly[i].feels_like}</h1>
+        <h1>Pressure ${data.hourly[i].pressure}</h1>
+        <h1>Humidity ${data.hourly[i].humidity}</h1>
         <br>
     `;
     newDiv.style.border = '1px solid black'
@@ -69,9 +69,4 @@ function cardCreator(data) {
   }
 }
 
-`
-5. inside the javascript, select the div and get it ready to append innerHTML or append cards in it
-6. create a function that accepts an object as argument and returns a string with HTML syntax that will represent a card
 
-7. Create a function that will fetch the GPS coordinates and then fetch the weather data for the given coordinates, and call the function that returns the data to return the data and add it to the card container.
-`;
