@@ -1,53 +1,51 @@
-const apiParameters = {
-  globalCity: `Skopje`,
-  apiKey: `74e59f6374abe0d9b758877616ae444c`,
-  apiFirstUrl: `https://api.openweathermap.org/data/2.5/onecall`,
-  apiSecondUrl: `https://api.openweathermap.org/data/2.5/forecast`,
-  imgUrl: ` http://openweathermap.org/img/wn/`,
-};
+// const apiParameters = {
+//   globalCity: `Skopje`,
+//   apiKey: `74e59f6374abe0d9b758877616ae444c`,
+//   apiFirstUrl: `https://api.openweathermap.org/data/2.5/onecall`,
+//   apiSecondUrl: `https://api.openweathermap.org/data/2.5/forecast`,
+//   imgUrl: ` http://openweathermap.org/img/wn/`,
+// };
 
-let div = document.getElementById("container");
+// let div = document.getElementById("container");
 
-const getLocation = () => {
-  return new Promise((resolve, reject) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          console.log(position);
-          return resolve(position);
-        },
-        (err) => {
-          return reject(err);
-        }
-      );
-    } else {
-      return reject("Geolocation is not supported by this browser.");
-    }
-  });
-};
+// const getLocation = () => {
+//   return new Promise((resolve, reject) => {
+//     if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition(
+//         (position) => {
+//           console.log(position);
+//           return resolve(position);
+//         },
+//         (err) => {
+//           return reject(err);
+//         }
+//       );
+//     } else {
+//       return reject("Geolocation is not supported by this browser.");
+//     }
+//   });
+// };
 
-getLocation().then((position) => {
-  const { latitude, longitude } = position.coords;
-  // const latitude = position.coords.latitude; istoto ko nad ova
-  // const longitude = position.coords.longitude; istoto ko nad ova
-
-  fetch(
-    `${apiParameters.apiFirstUrl}?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiParameters.apiKey}&exclude=minutely`
-  )
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      console.log(data.daily[0].dt);
-      console.log(data.hourly.length);
-      cardCreator(data);
-    });
-});
+// getLocation().then((position) => {
+//   const { latitude, longitude } = position.coords;
+//   fetch(
+//     `${apiParameters.apiFirstUrl}?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiParameters.apiKey}&exclude=minutely`
+//   )
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((data) => {
+//       console.log(data);
+//       console.log(data.daily[0].dt);
+//       console.log(data.hourly.length);
+//       cardCreator(data);
+//     });
+// });
 
 function cardCreator(data) {
   for (let i = data.hourly.length-1; i > 0; i--) {
     let newDiv = document.createElement("div");
+    newDiv.classList.add("div")
     newDiv.innerHTML = `
         <h1>Card ${i}</h1>
         <h1>${data.timezone}</h1>
