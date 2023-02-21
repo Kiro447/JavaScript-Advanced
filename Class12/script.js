@@ -1,3 +1,5 @@
+import Creator from "./creator.js";
+
 const api = {
     url:"https://swapi.dev/api/",
     films:"films/",
@@ -8,39 +10,27 @@ const api = {
     vehicles:"vehicles/"
   }
   
-  function textWrapper(element, maxLength) {
-    if (element.length > maxLength) {
-        element = element.substring(0, maxLength) + "..."
-        return element;
-    }
-}
 
-  async function getStoreData(category) {
+
+async function getStoreData(category, cardCreator) {
     try {
       const response = await fetch(`${api.url}${category}`);
       const data = await response.json();
       console.log(data.results);
       let mainData = data.results;
-      for (let element of mainData){
-        filmsCreator(element)
+      container.innerHTML = '';
+      for (let element of mainData) {
+        cardCreator(element);
       }
       return mainData;
     } catch (e) {
-      console.log('Error fetch');
+      console.log("Error fetching data", e);
     }
-  } 
+  }
   
   let container = document.getElementById('container')
   
-  function filmsCreator(element){
-    let newDiv = document.createElement('div');
-    newDiv.classList = 'movies';
-    newDiv.innerHTML = `
-      <div class="movies-title">${element.title}</div>
-      <div class="movies-text">${textWrapper(element.opening_crawl,300)}</div>
-    `;
-    container.appendChild(newDiv);
-  }
+
   
   let films = document.getElementById('films')
   let people = document.getElementById('people')
@@ -49,22 +39,29 @@ const api = {
   let starships = document.getElementById('starships')
   let vehicles = document.getElementById('vehicles')
   
+
+  
   films.addEventListener('click',()=>{
-    getStoreData(api.films)
+    getStoreData(api.films, Creator.filmsCreator)
   })
+  
   people.addEventListener('click',()=>{
-    getStoreData(api.people)
+    getStoreData(api.people, Creator.peopleCreator)
   })
+  
   planets.addEventListener('click',()=>{
-    getStoreData(api.planets)
+    getStoreData(api.planets, Creator.planetsCreator)
   })
+  
   species.addEventListener('click',()=>{
-    getStoreData(api.species)
+    getStoreData(api.species, Creator.speciesCreator)
   })
+  
   starships.addEventListener('click',()=>{
-    getStoreData(api.starships)
+    getStoreData(api.starships, Creator.starshipsCreator)
   })
+  
   vehicles.addEventListener('click',()=>{
-    getStoreData(api.vehicles)
+    getStoreData(api.vehicles, Creator.vehicleCreator)
   })
   
